@@ -1,170 +1,154 @@
 # GCP Weather Data Engineering Pipeline
 
-Este projeto implementa um **pipeline completo de engenharia de dados**, responsável por coletar, transformar e armazenar dados meteorológicos em nuvem, utilizando **Python** e **Google Cloud Platform (GCP)**. O foco é em simular um pipeline real de dados climáticos para fins de estudo e portfólio em Engenharia de Dados
+Projeto de Engenharia de Dados desenvolvido para simular um pipeline real de ingestão contínua de dados climáticos utilizando Python e Google Cloud Platform (GCP).
 
-O objetivo é simular um cenário real de ingestão contínua de dados, aplicando boas práticas de ETL/ELT, organização de código e versionamento.
-
----
-
-## 🎯 Objetivo do Projeto
-
-- Consumir dados climáticos de uma API pública
-- Estruturar e padronizar os dados coletados
-- Manter histórico incremental de medições
-- Armazenar os dados em um data warehouse (BigQuery)
-- Criar uma base pronta para análises e dashboards
+O foco do projeto é demonstrar, de forma clara e objetiva, como dados externos podem ser coletados, tratados e armazenados em um data warehouse na nuvem, seguindo boas práticas de organização, versionamento e reprodutibilidade.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Objetivo do Projeto
 
-- **Python 3**
-- **OpenWeather API**
-- **Google Cloud Platform (GCP)**
-  - BigQuery
-  - Cloud SDK
-- **Git / GitHub**
-- Bibliotecas Python:
-  - `requests`
-  - `pandas`
-  - `python-dotenv`
-  - `google-cloud-bigquery`
+* Consumir dados climáticos de uma API pública
+* Padronizar e estruturar os dados coletados
+* Manter histórico incremental de medições
+* Armazenar os dados em um data warehouse (BigQuery)
+* Disponibilizar uma base pronta para análises e dashboards
 
 ---
 
-## 🧱 Arquitetura do Pipeline
+## Tecnologias Utilizadas
 
-O pipeline foi estruturado seguindo um fluxo simples e realista de engenharia de dados:
+* Python 3
+* OpenWeather API
+* Google Cloud Platform (GCP)
+* BigQuery
+* Google Cloud SDK
+* Git e GitHub
 
-1. **Ingestão**  
-   Coleta de dados meteorológicos atuais de cidades brasileiras por meio da API OpenWeather.
+### Bibliotecas Python
 
-2. **Processamento**  
-   Tratamento, normalização e padronização dos dados, transformando o retorno da API em um formato tabular e analítico.
-
-3. **Carga**  
-   Armazenamento dos dados tratados no BigQuery, mantendo histórico incremental das medições.
-
-Fluxo resumido:
-
-
-OpenWeather API
-↓
-Ingestão (Python)
-↓
-Transformação (Pandas)
-↓
-Carga (BigQuery)
-
+* requests
+* pandas
+* python-dotenv
+* google-cloud-bigquery
 
 ---
 
-## 📁 Estrutura do Projeto
+## Arquitetura do Pipeline
 
+1. Ingestão de dados meteorológicos via API
+2. Tratamento e padronização dos dados
+3. Enriquecimento com metadados (localização e timestamp)
+4. Carga incremental no BigQuery
+5. Persistência do histórico para análises futuras
 
+O pipeline foi estruturado de forma modular, facilitando manutenção, automação e futuras expansões.
+
+---
+
+## Estrutura do Projeto
+
+```
 gcp-weather-data-engineering/
 │
-├── ingestion/
-│ └── extract_weather.py # Coleta dados da API
-│
-├── load/
-│ └── load_bigquery.py # Carga dos dados no BigQuery
-│
-├── sql/
-│ └── create_table.sql # Script SQL auxiliar (opcional)
-│
-├── .env.example # Exemplo de variáveis de ambiente
-├── .gitignore
-├── requirements.txt
-├── run_pipeline.py # Orquestra a execução do pipeline
-├── run_pipeline.bat # Execução no Windows
+├── ingestion/          # Coleta de dados da API
+├── load/               # Carga de dados no BigQuery
+├── sql/                # Scripts SQL auxiliares
+├── run_pipeline.py     # Orquestra a execução do pipeline
+├── requirements.txt    # Dependências do projeto
+├── .env.example        # Exemplo de variáveis de ambiente
 └── README.md
-
-
----
-
-## ⚙️ Pré-requisitos
-
-- Python 3.9 ou superior  
-- Conta ativa no Google Cloud Platform  
-- Projeto configurado no GCP  
-- Acesso à API OpenWeather  
-- Git instalado  
+```
 
 ---
 
-## 🔐 Variáveis de Ambiente
+## Como Executar o Projeto
 
-As credenciais sensíveis não são versionadas.
+### 1. Clonar o repositório
 
-1. Copie o arquivo `.env.example`
-2. Renomeie para `.env`
-3. Preencha com suas credenciais:
+```
+git clone https://github.com/RafaelCL94/gcp-weather-data-engineering.git
+cd gcp-weather-data-engineering
+```
 
+### 2. Criar e ativar ambiente virtual (opcional)
 
-OPENWEATHER_API_KEY=sua_api_key
-GCP_PROJECT_ID=seu_project_id
-
----
-
-🚀 Como Executar o Projeto
-1. Clonar o repositório
-git clone https://github.com/RafaelCL94/gcp-weather-data-engineering.gitcd gcp-weather-data-engineering
-2. Criar e ativar o ambiente virtual (opcional, recomendado)
+```
 python -m venv venv
-Windows
-venv\Scripts\activate
-3. Instalar as dependências
-pip install -r requirements.txt
-4. Autenticar no Google Cloud
-gcloud auth logingcloud auth application-default logingcloud config set project SEU_PROJECT_ID
-5. Executar o pipeline
-python run_pipeline.py
+```
 
-📊 Dados Armazenados no BigQuery
+Windows:
+
+```
+venv\Scripts\activate
+```
+
+### 3. Instalar dependências
+
+```
+pip install -r requirements.txt
+```
+
+### 4. Configurar variáveis de ambiente
+
+Crie um arquivo `.env` com base no `.env.example` e informe sua chave da API e configurações do projeto.
+
+### 5. Autenticar no Google Cloud
+
+```
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project SEU_PROJECT_ID
+```
+
+### 6. Executar o pipeline
+
+```
+python run_pipeline.py
+```
+
+---
+
+## Dados no BigQuery
 
 Os dados são carregados de forma incremental na tabela:
-weather.weather_history
 
+```
+weather.weather_history
+```
+
+Cada execução adiciona novos registros, preservando o histórico completo das medições climáticas.
 
 Campos principais:
 
-Cidade e país
-Temperatura atual, mínima e máxima
-Sensação térmica
-Umidade e pressão
-Velocidade do vento
-Condição climática
-Latitude e longitude
-Timestamp da coleta
-A tabela preserva o histórico de todas as execuções, permitindo análises ao longo do tempo.
+* Cidade e país
+* Temperatura atual, mínima e máxima
+* Sensação térmica
+* Umidade e pressão
+* Velocidade do vento
+* Condição climática
+* Latitude e longitude
+* Timestamp da coleta
 
+---
 
-📈 Possíveis Evoluções do Projeto
+## Possíveis Evoluções
 
+* Automatização do pipeline (scheduler)
+* Criação de dashboards analíticos
+* Validação e monitoramento da qualidade dos dados
+* Expansão para múltiplas cidades ou dados históricos
 
-Automatização do pipeline com agendador (Cloud Scheduler ou cron)
+---
 
-Criação de dashboards no Looker Studio ou Power BI
+## Autor
 
-Implementação de validações de qualidade de dados
-
-Expansão para múltiplas cidades ou dados históricos
-
-Monitoramento e logging do pipeline
-
-
-
-👤 Autor
 Rafael Cunha Lima
+Engenharia de Dados | Python | GCP | BigQuery
 
+GitHub: [https://github.com/RafaelCL94](https://github.com/RafaelCL94)
+LinkedIn: [https://www.linkedin.com/in/rafael-lima94](https://www.linkedin.com/in/rafael-lima94)
 
-GitHub: https://github.com/RafaelCL94
+---
 
-
-LinkedIn: https://www.linkedin.com/in/rafael-lima94
-
-
-
-📄 Observações
-Este projeto foi desenvolvido com foco em aprendizado prático e construção de portfólio em Engenharia de Dados, simulando desafios comuns encontrados em pipelines reais de ingestão, processamento e armazenamento de dados em nuvem.
+Este projeto foi desenvolvido com foco em aprendizado prático e construção de portfólio profissional, simulando desafios comuns encontrados em pipelines reais de dados.
