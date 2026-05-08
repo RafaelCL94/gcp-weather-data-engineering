@@ -107,29 +107,27 @@ GCP_PROJECT_ID=seu_project_id
 
 ---
 
-## 🚀 Como Executar o Projeto
-
-### 1. Clonar o repositório
-```bash
-git clone https://github.com/RafaelCL94/gcp-weather-data-engineering.git
-cd gcp-weather-data-engineering
+🚀 Como Executar o Projeto
+1. Clonar o repositório
+git clone https://github.com/RafaelCL94/gcp-weather-data-engineering.gitcd gcp-weather-data-engineering
 2. Criar e ativar o ambiente virtual (opcional, recomendado)
 python -m venv venv
-
-Ativar no Windows:
-
+Windows
 venv\Scripts\activate
-3. Instalar dependências
+3. Instalar as dependências
 pip install -r requirements.txt
 4. Autenticar no Google Cloud
-gcloud auth login
-gcloud auth application-default login
-gcloud config set project SEU_PROJECT_ID
+gcloud auth logingcloud auth application-default logingcloud config set project SEU_PROJECT_ID
 5. Executar o pipeline
 python run_pipeline.py
 
 📊 Dados Armazenados no BigQuery
-Os dados são carregados de forma incremental na tabela weather.weather_history, com campos como:
+
+Os dados são carregados de forma incremental na tabela:
+weather.weather_history
+
+
+Campos principais:
 
 Cidade e país
 Temperatura atual, mínima e máxima
@@ -139,21 +137,34 @@ Velocidade do vento
 Condição climática
 Latitude e longitude
 Timestamp da coleta
+A tabela preserva o histórico de todas as execuções, permitindo análises ao longo do tempo.
 
-A tabela preserva o histórico das execuções, permitindo análises ao longo do tempo.
 
-📈 Possíveis Evoluções
-Automatização do pipeline com agendador
+📈 Possíveis Evoluções do Projeto
+
+
+Automatização do pipeline com agendador (Cloud Scheduler ou cron)
+
 Criação de dashboards no Looker Studio ou Power BI
-Inclusão de validações de qualidade de dados
-Ampliação para dados históricos ou novas cidades
+
+Implementação de validações de qualidade de dados
+
+Expansão para múltiplas cidades ou dados históricos
+
 Monitoramento e logging do pipeline
+
+
 
 👤 Autor
 Rafael Cunha Lima
+
+
 GitHub: https://github.com/RafaelCL94
+
 
 LinkedIn: https://www.linkedin.com/in/rafael-lima94
 
+
+
 📄 Observações
-Este projeto foi desenvolvido com foco em aprendizado prático e construção de portfólio em Engenharia de Dados, simulando cenários comuns encontrados em pipelines reais de ingestão e processamento de dados.
+Este projeto foi desenvolvido com foco em aprendizado prático e construção de portfólio em Engenharia de Dados, simulando desafios comuns encontrados em pipelines reais de ingestão, processamento e armazenamento de dados em nuvem.
