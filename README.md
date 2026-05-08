@@ -1,6 +1,6 @@
 # GCP Weather Data Engineering Pipeline
 
-Este projeto implementa um **pipeline completo de engenharia de dados**, responsável por coletar, transformar e armazenar dados meteorológicos em nuvem, utilizando **Python** e **Google Cloud Platform (GCP)**.
+Este projeto implementa um **pipeline completo de engenharia de dados**, responsável por coletar, transformar e armazenar dados meteorológicos em nuvem, utilizando **Python** e **Google Cloud Platform (GCP)**.o foco é em simular um pipeline real de dados climáticos para fins de estudo e portfólio em Engenharia de Dados
 
 O objetivo é simular um cenário real de ingestão contínua de dados, aplicando boas práticas de ETL/ELT, organização de código e versionamento.
 
