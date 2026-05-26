@@ -60,7 +60,8 @@ O pipeline é **modular e orquestrado** pelo `run_pipeline.py`, permitindo execu
 
 > Análise climática de Brasília de 2020 a 2026 — KPIs, série histórica, mapa de calor mensal e indicadores de eventos extremos.
 
-![Dashboard Power BI](docs/dashboard_preview.png)
+<img width="1065" height="588" alt="image" src="https://github.com/user-attachments/assets/a478bacf-1b66-496b-ac61-b4c60b6b7f8e" />
+
 
 **Páginas e visões:**
 
