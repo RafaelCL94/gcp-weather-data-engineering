@@ -130,8 +130,8 @@ gcp-weather-data-engineering/
 ├── sql/                    # Queries auxiliares e criação de tabelas
 │   └── create_table.sql
 │
-├── docs/                   # Imagens e documentação adicional
-│   └── dashboard_preview.png
+├── dashboard/                   # Imagens e documentação adicional
+│   └── Dash_projeto_temp.png
 │
 ├── run_pipeline.py         # Orquestrador principal do pipeline
 ├── run_pipeline.bat        # Script de execução para Windows
